@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+  <rect width="920" height="560" fill="#fafafa"/>
+  <text x="460" y="28" text-anchor="middle" font-size="16" font-weight="bold">TaskFlow - PA4 Azure architecture</text>
+
+  <!-- GitHub -->
+  <rect x="40" y="60" width="120" height="44" rx="6" fill="#e8f5e9" stroke="#2e7d32"/>
+  <text x="100" y="88" text-anchor="middle">GitHub fork</text>
+  <text x="100" y="102" text-anchor="middle" font-size="10" fill="#555">CI/CD</text>
+
+  <!-- App Service Web App -->
+  <rect x="220" y="60" width="150" height="52" rx="6" fill="#e3f2fd" stroke="#1565c0"/>
+  <text x="295" y="88" text-anchor="middle" font-weight="bold">App Service</text>
+  <text x="295" y="104" text-anchor="middle">Web App (Node)</text>
+  <text x="295" y="118" text-anchor="middle" font-size="10" fill="#555">HTTPS UI</text>
+
+  <!-- Browser -->
+  <rect x="40" y="140" width="100" height="40" rx="6" fill="#fff3e0" stroke="#ef6c00"/>
+  <text x="90" y="166" text-anchor="middle">User browser</text>
+
+  <!-- Function App -->
+  <rect x="220" y="130" width="170" height="70" rx="6" fill="#f3e5f5" stroke="#6a1b9a"/>
+  <text x="305" y="156" text-anchor="middle" font-weight="bold">Function App</text>
+  <text x="305" y="172" text-anchor="middle">Container (Python)</text>
+  <text x="305" y="188" text-anchor="middle" font-size="10" fill="#555">Durable orchestrator</text>
+
+  <!-- AKS -->
+  <rect x="440" y="130" width="150" height="70" rx="6" fill="#e8eaf6" stroke="#3949ab"/>
+  <text x="515" y="156" text-anchor="middle" font-weight="bold">AKS cluster</text>
+  <text x="515" y="172" text-anchor="middle">validate-api</text>
+  <text x="515" y="188" text-anchor="middle" font-size="10" fill="#555">POST /validate via LB</text>
+
+  <!-- ACI -->
+  <rect x="630" y="130" width="150" height="70" rx="6" fill="#fce4ec" stroke="#c2185b"/>
+  <text x="705" y="156" text-anchor="middle" font-weight="bold">ACI</text>
+  <text x="705" y="172" text-anchor="middle">report-job</text>
+  <text x="705" y="188" text-anchor="middle" font-size="10" fill="#555">ephemeral per order</text>
+
+  <!-- Blob -->
+  <rect x="440" y="240" width="150" height="56" rx="6" fill="#fffde7" stroke="#f9a825"/>
+  <text x="515" y="266" text-anchor="middle" font-weight="bold">Blob Storage</text>
+  <text x="515" y="282" text-anchor="middle">container: reports</text>
+
+  <!-- ACR -->
+  <rect x="220" y="330" width="150" height="56" rx="6" fill="#e0f7fa" stroke="#00838f"/>
+  <text x="295" y="356" text-anchor="middle" font-weight="bold">ACR</text>
+  <text x="295" y="372" text-anchor="middle" font-size="10" fill="#555">validate / report / func images</text>
+
+  <!-- MI -->
+  <rect x="440" y="330" width="200" height="56" rx="6" fill="#efebe9" stroke="#5d4037"/>
+  <text x="540" y="356" text-anchor="middle" font-weight="bold">User-assigned MI</text>
+  <text x="540" y="372" text-anchor="middle" font-size="10" fill="#555">mi-pa4-roll for ACI + storage</text>
+
+  <!-- Arrows -->
+  <line x1="160" y1="82" x2="210" y2="82" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="180" y="76" font-size="10" fill="#555">deploy</text>
+
+  <line x1="140" y1="160" x2="210" y2="165" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="160" y="150" font-size="10" fill="#555">HTTPS</text>
+
+  <line x1="390" y1="165" x2="430" y2="165" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="400" y="156" font-size="10" fill="#555">HTTP /validate</text>
+
+  <line x1="390" y1="190" x2="620" y2="190" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="470" y="210" font-size="10" fill="#555">SDK create ACI</text>
+
+  <line x1="705" y1="200" x2="515" y2="240" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="600" y="228" font-size="10" fill="#555">upload PDF</text>
+
+  <path d="M 295 200 L 295 330" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="300" y="270" font-size="10" fill="#555">pull image</text>
+
+  <path d="M 515 200 L 515 240" stroke="#333" marker-end="url(#arrow)"/>
+
+  <path d="M 540 330 L 305 386" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="420" y="410" font-size="10" fill="#555">RBAC / identity</text>
+
+  <line x1="160" y1="360" x2="210" y2="358" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="175" y="350" font-size="10" fill="#555">docker push</text>
+
+  <!-- Legend -->
+  <rect x="40" y="430" width="840" height="100" rx="6" fill="#ffffff" stroke="#bbb"/>
+  <text x="60" y="452" font-weight="bold">Legend</text>
+  <text x="60" y="472">- GitHub Actions deploys the Web App from your fork (main).</text>
+  <text x="60" y="490">- Browser calls Web App only; Web App starts/polls the Durable Function (HTTP starter + status URLs).</text>
+  <text x="60" y="508">- Orchestrator calls AKS validator, then creates ACI for report-job; ACI writes PDFs to Blob using MI.</text>
+  <text x="60" y="526">- All container images are pulled from ACR (Function, AKS, ACI).</text>
+</svg>

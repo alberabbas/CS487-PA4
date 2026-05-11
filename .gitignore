@@ -8,3 +8,8 @@ venv/
 local.settings.generated.json
 npm-debug.log*
 *.pdf
+
+# Azurite / Functions local emulator — contains host keys and durable state; never commit
+function-app/__blobstorage__/
+function-app/__azurite_db_*.json
+function-app/AzuriteConfig
